@@ -1,0 +1,233 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 10px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.booth-count {
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+thead {
+    background: #667eea;
+    color: white;
+}
+
+thead th {
+    padding: 15px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+thead th:first-child {
+    width: 60px;
+    text-align: center;
+}
+
+thead th:nth-child(2) {
+    min-width: 250px;
+}
+
+thead th:last-child {
+    width: 120px;
+    text-align: center;
+}
+
+tbody tr {
+    border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+td {
+    padding: 15px 10px;
+    vertical-align: top;
+}
+
+td:first-child {
+    text-align: center;
+    font-weight: 600;
+    color: #667eea;
+    font-size: 16px;
+}
+
+td:nth-child(2) {
+    line-height: 1.6;
+}
+
+.booth-name {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.booth-name-english {
+    font-size: 16.25px;
+    color: #666;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.location-link {
+    display: inline-block;
+    background: #667eea;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.location-link:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.location-link:active {
+    transform: translateY(0);
+}
+
+td:last-child {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 5px;
+    }
+
+    .container {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .booth-count {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    thead th {
+        padding: 12px 8px;
+        font-size: 13px;
+    }
+
+    thead th:first-child {
+        width: 50px;
+    }
+
+    thead th:last-child {
+        width: 100px;
+    }
+
+    td {
+        padding: 12px 8px;
+    }
+
+    td:first-child {
+        font-size: 14px;
+    }
+
+    .booth-name {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .booth-name-english {
+        font-size: 15px;
+    }
+
+    .location-link {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    .table-wrapper {
+        margin: 0 -15px;
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    thead th {
+        padding: 10px 6px;
+        font-size: 12px;
+    }
+
+    td {
+        padding: 10px 6px;
+    }
+
+    .booth-name {
+        font-size: 13px;
+    }
+
+    .booth-name-english {
+        font-size: 13.75px;
+    }
+
+    .location-link {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+}
