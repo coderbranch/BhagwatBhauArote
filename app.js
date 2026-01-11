@@ -252,18 +252,22 @@ const allBoothsData = {
 // Function to render booths
 function renderBooths(booths) {
     const tbody = document.getElementById('boothsTableBody');
+    const cardsContainer = document.getElementById('boothsCards');
     const countElement = document.getElementById('boothCount');
     
     // Clear existing content
     tbody.innerHTML = '';
+    cardsContainer.innerHTML = '';
     
     // Update count
     countElement.textContent = `Total Booths: ${booths.length}`;
     
-    // Create table rows for each booth
+    // Create table rows and cards for each booth
     booths.forEach((booth, index) => {
-        const row = document.createElement('tr');
+        const shareText = `${booth.boothName}\n${booth.boothNameEnglish}\n${booth.BoothaLocation}`;
         
+        // Create table row
+        const row = document.createElement('tr');
         row.innerHTML = `
             <td>${index + 1}</td>
             <td>
@@ -271,12 +275,72 @@ function renderBooths(booths) {
                 <div class="booth-name-english">${booth.boothNameEnglish}</div>
             </td>
             <td>
-                <a href="${booth.BoothaLocation}" class="location-link" target="_blank">Location</a>
+                <div class="button-group">
+                    <a href="${booth.BoothaLocation}" class="location-link" target="_blank"><span class="icon">📍</span>Location</a>
+                    <button class="share-link" data-share-text="${encodeURIComponent(shareText)}"><span class="icon">📤</span>Share</button>
+                </div>
             </td>
         `;
-        
         tbody.appendChild(row);
+        
+        // Create mobile card
+        const card = document.createElement('div');
+        card.className = 'booth-card';
+        card.innerHTML = `
+            <div class="booth-card-header">
+                <div class="booth-number">${index + 1}</div>
+            </div>
+            <div class="booth-card-body">
+                <div class="booth-name">${booth.boothName}</div>
+                <div class="booth-name-english">${booth.boothNameEnglish}</div>
+            </div>
+            <div class="booth-card-actions">
+                <a href="${booth.BoothaLocation}" class="location-link" target="_blank"><span class="icon">📍</span>Location</a>
+                <button class="share-link" data-share-text="${encodeURIComponent(shareText)}"><span class="icon">📤</span>Share</button>
+            </div>
+        `;
+        cardsContainer.appendChild(card);
     });
+    
+    // Attach share button event listeners
+    document.querySelectorAll('.share-link').forEach(button => {
+        button.addEventListener('click', function() {
+            const shareText = decodeURIComponent(this.getAttribute('data-share-text'));
+            shareBooth(shareText);
+        });
+    });
+}
+
+// Function to share booth information
+function shareBooth(shareText) {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Booth Information',
+            text: shareText,
+        }).catch(err => {
+            console.log('Error sharing:', err);
+            fallbackShare(shareText);
+        });
+    } else {
+        fallbackShare(shareText);
+    }
+}
+
+// Fallback share function
+function fallbackShare(shareText) {
+    const textArea = document.createElement('textarea');
+    textArea.value = shareText;
+    textArea.style.position = 'fixed';
+    textArea.style.opacity = '0';
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+        document.execCommand('copy');
+        alert('Booth information copied to clipboard!');
+    } catch (err) {
+        alert('Please copy manually:\n\n' + shareText);
+    }
+    document.body.removeChild(textArea);
 }
 
 // Initialize on page load
